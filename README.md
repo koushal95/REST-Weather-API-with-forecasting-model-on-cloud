@@ -40,3 +40,16 @@ Code  | Description
 ---   | ---
 **200** | *JSON array of weather information containing data for DATE, TMAX, TMIN.*
 **404** | *Error message in JSON format.*
+
+#### POST
+/historical
+
+Description: Adds weather information for a particular date. The date is taken from the Request object body.
+
+Parameters: None. There are no explicit parameters, the date is extracted from the request object body.
+
+Response:
+
+Code  | Description
+--- | ---
+**201** | Successfully added the weather information in the request object's body to the data, and returns the date that is added. The date is returned in JSON format.

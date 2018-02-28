@@ -1,7 +1,7 @@
 import csv
 import json
 from flask import Flask
-from flask_restful import Resource, Api
+from flask_restful import Resource, Api, abort
 
 csvfile = open('../data/daily.csv', 'r')
 jsonfile = open('../data/out/weather.json', 'w')

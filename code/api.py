@@ -22,3 +22,12 @@ class ListAllDates(Resource):
         return res
 
 api.add_resource(ListAllDates, '/historical/')
+
+class InfoForDate(Resource):
+    def get(self, date):
+        for i in range(len(data)):
+            if data[i]['DATE'] == date:
+                return data[i]
+        abort(404, message="No weather information for date {} is available.".format(date))
+
+api.add_resource(InfoForDate, '/historical/<string:date>')

@@ -53,3 +53,18 @@ Response:
 Code  | Description
 --- | ---
 **201** | Successfully added the weather information in the request object's body to the data, and returns the date that is added. The date is returned in JSON format.
+
+#### DELETE
+/historical/'date YYYYMMDD'
+
+Description: Deletes the weather information for the date passed as parameter.
+
+Parameter: The parameter value is a string of date in 'YYYYMMDD' format. 
+
+Datatype: String.
+
+Response:
+
+Code  | Description
+--- | ---
+**204** | *Sucessfully deleted the weather information for specified date in the parameter.*

@@ -24,7 +24,7 @@ class ListAllDates(Resource):
     def post(self):
         data.append(request.get_json(force=True))
         return {"DATE" : request.get_json(force=True)["DATE"]}, 201
-        
+
 api.add_resource(ListAllDates, '/historical/')
 
 class InfoForDate(Resource):
@@ -34,4 +34,14 @@ class InfoForDate(Resource):
                 return data[i]
         abort(404, message="No weather information for date {} is available.".format(date))
 
+    def delete(self, date):
+        for i in range(len(data)):
+            if data[i]['DATE'] == date:
+                del data[i]
+                break
+        return "", 204
+
 api.add_resource(InfoForDate, '/historical/<string:date>')
+
+if __name__ == '__main__':
+	app.run()

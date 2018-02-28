@@ -1,6 +1,6 @@
 import csv
 import json
-from flask import Flask
+from flask import Flask, request
 from flask_restful import Resource, Api, abort
 
 csvfile = open('../data/daily.csv', 'r')
@@ -21,6 +21,10 @@ class ListAllDates(Resource):
             res.append({"DATE" : data[i]["DATE"]})
         return res
 
+    def post(self):
+        data.append(request.get_json(force=True))
+        return {"DATE" : request.get_json(force=True)["DATE"]}, 201
+        
 api.add_resource(ListAllDates, '/historical/')
 
 class InfoForDate(Resource):

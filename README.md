@@ -24,3 +24,19 @@ Response:
 Code  | Description
 ----  | ---
 **200** | *JSON array of dates in 'YYYYMMDD' format.*
+
+#### GET
+/historical/'date YYYYMMDD'
+
+Description: This returns the weather information for the passed parameter date. If no information is available error is returned.
+
+Parameter: The parameter value is a string of date in 'YYYYMMDD' format. 
+
+Datatype: String
+ 
+Response: 
+
+Code  | Description
+---   | ---
+**200** | *JSON array of weather information containing data for DATE, TMAX, TMIN.*
+**404** | *Error message in JSON format.*

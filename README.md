@@ -5,6 +5,26 @@ This repository contains code to implement a RESTful service to serve weather da
 
 This is a markdown specification about the REST API developed to serve weather data of Cincinnati for past five years.
 
+## Overview:
+1. Schemes
+
+* HTTP
+
+2. Endpoints
+
+* /historical
+
+   * GET
+
+   * POST
+
+* /historical/'date'
+
+    * GET
+
+    * DELETE
+
+
 ## Schemes:
 
 * HTTP

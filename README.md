@@ -72,7 +72,7 @@ Response:
 
 Code  | Description
 --- | ---
-**201** | Successfully added the weather information in the request object's body to the data, and returns the date that is added. The date is returned in JSON format.
+**201** | *Successfully added the weather information in the request object's body to the data, and returns the date that is added. The date is returned in JSON format.*
 
 #### DELETE
 /historical/'date YYYYMMDD'
@@ -88,3 +88,6 @@ Response:
 Code  | Description
 --- | ---
 **204** | *Sucessfully deleted the weather information for specified date in the parameter.*
+
+## Update: Forecast model coming up
+I am working on a model, to forecast the weather information for future dates accounting to the observed trends and seasonality of the data. 

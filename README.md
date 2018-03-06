@@ -91,3 +91,8 @@ Code  | Description
 
 ## Update: Forecast model coming up
 I am working on a model, to forecast the weather information for future dates accounting to the observed trends and seasonality of the data. 
+
+## About Forecast model
+I came across this interesting tool developed by Facebook research team. I wrote a few pages about it. Head over to wiki of this repository to view those pages. The notebook 'forecasting model' is my first attempt to use this tool. I will soon use this tool to forecast and integrate it to the API.
+
+I have pushed a PDF version of my notebook with an example of using Prophet. This goes with the wiki page 'More about Prophet'.

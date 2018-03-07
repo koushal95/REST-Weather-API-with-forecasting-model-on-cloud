@@ -47,6 +47,51 @@ class InfoForDate(Resource):
 
 api.add_resource(InfoForDate, '/historical/<string:date>')
 
+class Forecast(Resource):
+    def get(self, date):
+        res = []
+        for i in range(len(data)):
+            if data[i]['DATE'] == date:
+                if i + 6 <= len(data)-1:
+                    # whole data is already available
+                    for j in range(7):
+                        res.append(data[i + j])
+                    return res
+                elif i == len(data)-1:
+                    # input date is last value in our data
+                    res.append(data[i])
+                    periods = 6
+                    return_value = make_predictions(periods, date, True)
+                    prediction_json = json.loads(return_value)
+                    for j in range(6):
+                        res.append(prediction_json[j])
+                    return res
+                else:
+                    # few dates available
+                    last_date_string = data[len(data)-1]['DATE']
+                    last_date = datetime.strptime(last_date_string, '%Y%m%d')
+                    input_date = datetime.strptime(date, '%Y%m%d')
+                    days_available = (last_date - input_date).days + 1 ## increment 1 if including date in URL
+                    periods = 7 - days_available
+                    return_value = make_predictions(periods, last_date_string, True)
+                    prediction_json = json.loads(return_value)
+                    for j in range(days_available):
+                        res.append(data[i+j])
+                    for k in range(periods):
+                        res.append(prediction_json[k])
+                    return res
+
+        #date not found that means future date
+        last_date_string = data[len(data)-1]['DATE']
+        last_date = datetime.strptime(last_date_string, '%Y%m%d')
+        future_date = datetime.strptime(date, '%Y%m%d')
+        periods = (future_date - last_date).days + 6
+        return_value = make_predictions(periods, date, False)
+        res = json.loads(return_value)
+        return res
+
+api.add_resource(Forecast, '/forecast/<string:date>')
+
 def make_predictions(periods, input_date, next):
     weather_data = pd.read_csv("../data/daily.csv")
     # converting date string to datetime object

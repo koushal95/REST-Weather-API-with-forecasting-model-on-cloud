@@ -2,6 +2,10 @@ import csv
 import json
 from flask import Flask, request
 from flask_restful import Resource, Api, abort
+from datetime import datetime
+import pandas as pd
+import numpy as np
+from fbprophet import Prophet
 
 csvfile = open('../data/daily.csv', 'r')
 jsonfile = open('../data/out/weather.json', 'w')
@@ -42,6 +46,51 @@ class InfoForDate(Resource):
         return "", 204
 
 api.add_resource(InfoForDate, '/historical/<string:date>')
+
+def make_predictions(periods, input_date, next):
+    weather_data = pd.read_csv("../data/daily.csv")
+    # converting date string to datetime object
+    weather_data["DATE"] = pd.to_datetime(weather_data["DATE"], format='%Y%m%d')
+    # creating dataframe for Tmax
+    tmax_df = weather_data.loc[:, 'DATE':'TMAX']
+    # changing column names for Prophet
+    tmax_df.columns = ['ds', 'y']
+    # creating dataframe for Tmin
+    tmin_df = weather_data.loc[:, ['DATE', 'TMIN']]
+    # changing column names for Prophet
+    tmin_df.columns = ['ds', 'y']
+    # creating model for Tmax
+    model_tmax = Prophet()
+    model_tmax.fit(tmax_df)
+    # creating model for Tmin
+    model_tmin = Prophet()
+    model_tmin.fit(tmin_df)
+    # creating future dataframe (date indices) for Tmax
+    future_tmax = model_tmax.make_future_dataframe(periods=periods, include_history=False)
+    # making predictions for Tmax
+    predictions_tmax = model_tmax.predict(future_tmax)
+    # creating future dataframe for Tmin
+    future_tmin = model_tmin.make_future_dataframe(periods=periods, include_history=False)
+    # making predictions for Tmin
+    predictions_tmin = model_tmin.predict(future_tmin)
+    # pretty predictions
+    predictions_tmax_res = predictions_tmax.loc[:, ['ds', 'yhat']]
+    predictions_tmin_res = predictions_tmin.loc[:, ['ds', 'yhat']]
+    # concatenating the predictions of Tmax and Tmin
+    frames = [predictions_tmax_res, predictions_tmin_res.yhat]
+    result = pd.concat(frames, axis=1)
+    # resetting column names to our format
+    result.columns = ["DATE", "TMAX", "TMIN"]
+    # returing only the result we need 
+    if next == True:
+        return_value = result.loc[result['DATE'] > datetime.strptime(input_date, '%Y%m%d')]
+    else:
+        return_value = result.loc[result['DATE'] >= datetime.strptime(input_date, '%Y%m%d')]
+    # since json exporting makes date objects messy, converting datetime as string
+    return_value['DATE'] = return_value['DATE'].apply(lambda x: datetime.strftime(x, '%Y%m%d'))
+    # exporting the result dataframe to json format
+    json_format_result = return_value.to_json(orient='records', double_precision=1)
+    return json_format_result
 
 if __name__ == '__main__':
 	app.run()

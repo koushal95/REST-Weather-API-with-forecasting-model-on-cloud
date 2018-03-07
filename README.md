@@ -96,3 +96,24 @@ I am working on a model, to forecast the weather information for future dates ac
 I came across this interesting tool developed by Facebook research team. I wrote a few pages about it. Head over to wiki of this repository to view those pages. The notebook 'forecasting model' is my first attempt to use this tool. I will soon use this tool to forecast and integrate it to the API.
 
 I have pushed a PDF version of my notebook with an example of using Prophet. This goes with the wiki page 'More about Prophet'.
+## Update: Forecast model built and integrated!!
+
+### forecast
+This endpoint has forecasting feature for the next seven days. 
+
+#### GET
+/forecast/'date YYYYMMDD'
+
+Description: Forecasts the weather information for the next seven days starting with the date passed as parameter. The forecast is done using fbprophet.
+
+Parameter: The parameter value is a string of date in 'YYYYMMDD' format.
+
+Datatype: String.
+
+Response:
+
+Code  | Description
+--- | ---
+**200** | *Returns a JSON array containing weather information for the next seven days starting with the date passed as parameter.
+
+

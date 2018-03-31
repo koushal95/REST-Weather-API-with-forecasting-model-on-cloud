@@ -116,4 +116,5 @@ Code  | Description
 --- | ---
 **200** | *Returns a JSON array containing weather information for the next seven days starting with the date passed as parameter.
 
-
+## Update: Added View pages
+I used Angular JS to bind the data from the API onto the View page. I have used Google Charts to plot the forecast for next seven days. 

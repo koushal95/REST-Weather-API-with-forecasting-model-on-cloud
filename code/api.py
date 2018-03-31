@@ -1,6 +1,6 @@
 import csv
 import json
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask_restful import Resource, Api, abort
 from datetime import datetime
 import pandas as pd
@@ -18,6 +18,10 @@ data = json.loads(out)
 app = Flask(__name__)
 api = Api(app)
 
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
+def index():
+    return render_template('index.html')
 class ListAllDates(Resource):
     def get(self):
         res = []

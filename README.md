@@ -96,6 +96,17 @@ I am working on a model, to forecast the weather information for future dates ac
 I came across this interesting tool developed by Facebook research team. I wrote a few pages about it. Head over to wiki of this repository to view those pages. The notebook 'forecasting model' is my first attempt to use this tool. I will soon use this tool to forecast and integrate it to the API.
 
 I have pushed a PDF version of my notebook with an example of using Prophet. This goes with the wiki page 'More about Prophet'.
+
+Although the wiki pages tab is available right on repository page, I want to provide the list of links to the pages in an order that would make sense while going through. This is added only to emphasize on the order of pages. Here are the list of links of the wiki pages I wrote:
+
+* [About Facebook Prophet](https://github.com/koushal95/REST-Weather-API-with-forecasting-model-on-coud/wiki/About-Facebook-Prophet)
+
+* [Installing Facebook's Prophet](https://github.com/koushal95/REST-Weather-API-with-forecasting-model-on-coud/wiki/Installation-Facebook-Prophet-(for-Python))
+
+* [More about Prophet](https://github.com/koushal95/REST-Weather-API-with-forecasting-model-on-coud/wiki/More-about-Prophet)
+
+* [Advanced Features of Prophet](https://github.com/koushal95/REST-Weather-API-with-forecasting-model-on-coud/wiki/Advanced-features----Prophet)
+
 ## Update: Forecast model built and integrated!!
 
 ### forecast
